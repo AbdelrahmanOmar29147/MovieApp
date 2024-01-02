@@ -1,21 +1,37 @@
-<div class="row">
-  <div class="col-12">
-    <form class="container">
-      <!-- [formControl]="emailFormControl" -->
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input type="email" matInput placeholder="Ex. pat@example.com" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input type="password" matInput />
-      </mat-form-field>
-      <button mat-button type="submit">
-        {{ isLogin ? "Login" : "Sign Up" }}
-      </button>
-      <button mat-button (click)="onSwitchAuth()">
-        {{ isLogin ? "Sign Up" : "Login" }}
-      </button>
-    </form>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger" *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
+      <div *ngIf="isLoading">
+        <app-spinner></app-spinner>
+      </div>
+      <form
+        [formGroup]="authenticationForm"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+      >
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            placeholder="Ex. pat@example.com"
+            formControlName="email"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" />
+        </mat-form-field>
+        <button mat-button type="submit" [disabled]="!authenticationForm.valid">
+          {{ isLogin ? "Login" : "Sign Up" }}
+        </button>
+        <button mat-button type="button" (click)="onSwitchAuth()">
+          {{ isLogin ? "Sign Up" : "Login" }}
+        </button>
+      </form>
+    </div>
   </div>
 </div>

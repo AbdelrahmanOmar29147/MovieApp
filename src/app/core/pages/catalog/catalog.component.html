@@ -1,1 +1,47 @@
-<p>catalog works!</p>
+<div class="container">
+  <div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+  </div>
+  <div class="row" *ngIf="!isLoading">
+    <div class="col-3" *ngFor="let movie of moviesList">
+      <mat-card>
+        <mat-card-content>{{ movie.title }}</mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="paginator d-flex justify-content-center align-items-center">
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="getFirstPage()"
+      [disabled]="currentPage === 1"
+    >
+      <<
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="getPrevPage()"
+      [disabled]="currentPage === 1"
+    >
+      <
+    </button>
+    <span>{{ currentPage }}</span>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="getNextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      >
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="getLastPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      >>
+    </button>
+  </div>
+</div>

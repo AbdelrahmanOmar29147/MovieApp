@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -19,5 +20,6 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     MatButtonModule,
   ],
+  providers: [AuthenticationService],
 })
 export class AuthenticationModule {}
