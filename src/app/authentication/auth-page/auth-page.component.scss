@@ -1,0 +1,4 @@
+.submit-button:not(:disabled) {
+  background-color: var(--mdc-circular-progress-active-indicator-color);
+  color: white;
+}

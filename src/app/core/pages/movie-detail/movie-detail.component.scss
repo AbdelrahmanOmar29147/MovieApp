@@ -1,0 +1,147 @@
+header {
+  position: relative;
+  color: white;
+  background-color: #3f51b5;
+  z-index: -11;
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+  .movie-title {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 900;
+  }
+
+  .movie-img {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .movie-tagline {
+    margin-top: 1rem;
+
+    opacity: 0.8;
+  }
+
+  .inline-details {
+    span + span::before {
+      font-size: 1.1em;
+      line-height: 1;
+      content: "•";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 7px;
+      display: inline-flex;
+      align-content: center;
+      align-items: center;
+      z-index: -1;
+    }
+    span + span {
+      padding-left: 20px;
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .background-img {
+    z-index: -10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: right;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -9;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-image: linear-gradient(
+      to right,
+      rgba(181, 163, 63, 0.84) 0%,
+      rgba(181, 163, 63, 0.64) 50%,
+      rgba(181, 163, 63, 0.34) 100%
+    );
+  }
+}
+
+article {
+  .title {
+    color: #3f51b5;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .cast-slider {
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    .actor-img {
+      width: 100%;
+      border-radius: 4px;
+    }
+    .actor-title {
+      margin-bottom: 0rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .actor-character {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  header {
+    .container-wrapper {
+      padding: 0rem;
+    }
+    .movie-title {
+      margin-top: 1rem;
+    }
+    .background-img {
+      height: 50%;
+    }
+    &::before {
+      height: 50%;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header {
+    .movie-title {
+      font-size: 2rem;
+    }
+    .background-img {
+      height: 40%;
+    }
+    &::before {
+      height: 40%;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  header {
+    .movie-title {
+      font-size: 1.75rem;
+      margin-bottom: 0;
+    }
+    .background-img {
+      height: 30%;
+    }
+    &::before {
+      height: 30%;
+    }
+  }
+}

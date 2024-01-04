@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../models/movies';
 import { Subscription } from 'rxjs';
@@ -8,14 +8,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.scss',
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent implements OnInit, OnDestroy {
   constructor(private _moviesservice: MoviesService) {}
 
   isLoading: boolean = false;
   moviesList!: Movie[];
   totalPages!: number;
   currentPage = 1;
-  subscription!: Subscription;
+  movieSubscription!: Subscription;
 
   ngOnInit(): void {
     this.getMovies(this.currentPage);
@@ -23,8 +23,8 @@ export class CatalogComponent implements OnInit {
 
   getMovies(pageNumber: number): void {
     this.isLoading = true;
-    this.subscription && this.subscription.unsubscribe();
-    this.subscription = this._moviesservice
+    this.movieSubscription && this.movieSubscription.unsubscribe();
+    this.movieSubscription = this._moviesservice
       .getTopMovies(pageNumber)
       .subscribe((res) => {
         this.moviesList = res.results;
@@ -33,23 +33,7 @@ export class CatalogComponent implements OnInit {
       });
   }
 
-  getNextPage() {
-    this.currentPage++;
-    this.getMovies(this.currentPage);
-  }
-
-  getPrevPage() {
-    this.currentPage--;
-    this.getMovies(this.currentPage);
-  }
-
-  getFirstPage() {
-    this.currentPage = 1;
-    this.getMovies(this.currentPage);
-  }
-
-  getLastPage() {
-    this.currentPage = this.totalPages;
-    this.getMovies(this.currentPage);
+  ngOnDestroy() {
+    this.movieSubscription.unsubscribe();
   }
 }

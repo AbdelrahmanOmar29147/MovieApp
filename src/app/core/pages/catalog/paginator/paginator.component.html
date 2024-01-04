@@ -1,0 +1,35 @@
+<div class="paginator d-flex justify-content-center align-items-center pb-2">
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="getFirstPage()"
+    [disabled]="currentPage === 1"
+  >
+    <<
+  </button>
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="getPrevPage()"
+    [disabled]="currentPage === 1"
+  >
+    <
+  </button>
+  <span>{{ currentPage + " of " + totalPages }}</span>
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="getNextPage()"
+    [disabled]="currentPage === totalPages"
+  >
+    >
+  </button>
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="getLastPage()"
+    [disabled]="currentPage === totalPages"
+  >
+    >>
+  </button>
+</div>

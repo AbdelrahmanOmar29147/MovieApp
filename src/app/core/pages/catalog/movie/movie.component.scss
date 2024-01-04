@@ -1,0 +1,70 @@
+.mat-mdc-card {
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  .movie-img {
+    border-radius: var(--mdc-elevated-card-container-shape);
+  }
+
+  .movie-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .movie-date {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1rem;
+  }
+
+  .spinner-container {
+    bottom: 14%;
+    right: 1.5%;
+    .spinner-text {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fafafd;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .spinner-color::ng-deep circle {
+      stroke: var(--mdc-circular-progress-active-indicator-color);
+      fill: black;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .mat-mdc-card {
+    .spinner-container {
+      bottom: 17.5%;
+      right: 2.5%;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .mat-mdc-card {
+    .spinner-container {
+      bottom: 16.5%;
+      right: 2.5%;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .mat-mdc-card {
+    .spinner-container {
+      bottom: 11%;
+      right: 2%;
+    }
+  }
+}
