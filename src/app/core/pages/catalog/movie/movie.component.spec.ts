@@ -14,7 +14,6 @@ describe('MovieComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [MovieComponent],
       imports: [CoreModule, RouterTestingModule],
-      providers: [MoviesService],
     }).compileComponents();
 
     moviesService = TestBed.inject(MoviesService);

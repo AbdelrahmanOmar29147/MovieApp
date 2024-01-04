@@ -19,10 +19,7 @@ describe('CatalogComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CatalogComponent, PaginatorComponent],
       imports: [SharedModule],
-      providers: [
-        MoviesService,
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
+      providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     }).compileComponents();
 
     moviesService = TestBed.inject(MoviesService);
