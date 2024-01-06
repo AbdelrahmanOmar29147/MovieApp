@@ -1,0 +1,20 @@
+{
+  "brand": "CineHub",
+  "catalog": "Catalog",
+  "logout": "Logout",
+  "lang": "ع",
+  "email": "Email",
+  "password": "Password",
+  "example": "Ex.",
+  "login": "Login",
+  "signup": "Sign Up ",
+  "switchToLogin": "Switch to Login",
+  "switchToSign": "Switch to Sign Up",
+  "overview": "Overview",
+  "moreInfo": "More Info",
+  "cast": "Top Billed Task",
+  "status": "Status",
+  "budget": "Budget",
+  "revenue": "Revenue",
+  "mins": "Mins"
+}

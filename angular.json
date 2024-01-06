@@ -60,6 +60,14 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "bonus": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.bonus.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -72,6 +80,9 @@
             },
             "development": {
               "buildTarget": "MovieApp:build:development"
+            },
+            "bonus": {
+              "buildTarget": "MovieApp:build:bonus"
             }
           },
           "defaultConfiguration": "development"

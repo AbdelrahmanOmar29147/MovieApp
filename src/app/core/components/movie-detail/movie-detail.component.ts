@@ -3,6 +3,7 @@ import { MoviesService } from '../../services/movies.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MovieCredits, MovieDetails } from '../../models/movies';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movie-detail',
@@ -18,15 +19,21 @@ export class MovieDetailComponent {
 
   constructor(
     private moviesService: MoviesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
+    this.getMovieID();
+    this.getMovieDetails();
+    this.getMovieCredits();
+    this.handleLanguageChange();
+  }
+
+  getMovieID() {
     this.route.params.subscribe((params: Params) => {
       this.movieID = params['id'];
     });
-    this.getMovieDetails();
-    this.getMovieCredits();
   }
 
   getMovieDetails(): void {
@@ -46,8 +53,10 @@ export class MovieDetailComponent {
       });
   }
 
-  ngOnDestroy() {
-    this.detailsSubscription.unsubscribe();
-    this.creditsSubscription.unsubscribe();
+  handleLanguageChange(): void {
+    this.translate.onLangChange.subscribe(() => {
+      this.getMovieDetails();
+      this.getMovieCredits();
+    });
   }
 }

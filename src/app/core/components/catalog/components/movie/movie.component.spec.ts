@@ -1,9 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovieComponent } from './movie.component';
-import { CoreModule } from '../../../core.module';
+import { CoreModule } from '../../../../core.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MoviesService } from '../../../services/movies.service';
+import { MoviesService } from '../../../../services/movies.service';
+import {
+  TranslateService,
+  TranslateStore,
+  TranslateModule,
+  TranslateLoader,
+} from '@ngx-translate/core';
 
 describe('MovieComponent', () => {
   let component: MovieComponent;
@@ -13,7 +19,8 @@ describe('MovieComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MovieComponent],
-      imports: [CoreModule, RouterTestingModule],
+      imports: [CoreModule, RouterTestingModule, TranslateModule],
+      providers: [TranslateService, TranslateStore, TranslateLoader],
     }).compileComponents();
 
     moviesService = TestBed.inject(MoviesService);
@@ -28,7 +35,7 @@ describe('MovieComponent', () => {
 
   it('should display a movie correctly', (done: DoneFn) => {
     let compiled;
-    moviesService.getTopMovies(1).subscribe((data) => {
+    moviesService.getMovies(1).subscribe((data) => {
       component.movie = data.results[0];
       fixture.detectChanges();
       compiled = fixture.nativeElement;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationModule } from './authentication.module';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { FIRE_BASE_API_KEY } from '../environments/environment';
+import { ENV } from '../../environments/environment';
 import { BehaviorSubject, Subject, catchError, tap, throwError } from 'rxjs';
 import { AuthResponseData, User } from './user.model';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ export class AuthenticationService {
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIRE_BASE_API_KEY}`,
+        ENV.firebase.baseUrl + `accounts:signUp?key=${ENV.firebase.key}`,
         { email: email, password: password, returnSecureToken: true }
       )
       .pipe(
@@ -36,7 +36,8 @@ export class AuthenticationService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIRE_BASE_API_KEY}`,
+        ENV.firebase.baseUrl +
+          `accounts:signInWithPassword?key=${ENV.firebase.key}`,
         { email: email, password: password, returnSecureToken: true }
       )
       .pipe(

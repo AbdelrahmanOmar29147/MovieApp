@@ -1,39 +1,53 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TMDB_API_KEY } from '../../environments/environment';
+import { ENV } from '../../../environments/environment';
 import {
   MovieCredits,
   MovieDetails,
   MoviesResponseData,
 } from '../models/movies';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MoviesService {
-  constructor(private http: HttpClient) {}
+  language: string = localStorage.getItem('language')!;
 
-  getTopMovies(pageNumber: number) {
+  constructor(private http: HttpClient, private translate: TranslateService) {}
+
+  getLanguage() {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.language = event.lang;
+    });
+  }
+
+  getMovies(pageNumber: number) {
+    this.getLanguage();
     return this.http.get<MoviesResponseData>(
-      `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${pageNumber}`,
+      ENV.TMDB.bonusUrl + `?language=${this.language}S&page=${pageNumber}`,
       {
-        params: new HttpParams().set('api_key', TMDB_API_KEY),
+        params: new HttpParams().set('api_key', ENV.TMDB.key),
       }
     );
   }
+
   getMovieDetails(movieID: number) {
+    this.getLanguage();
     return this.http.get<MovieDetails>(
-      `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
+      ENV.TMDB.baseUrl + `${movieID}?language=${this.language}`,
       {
-        params: new HttpParams().set('api_key', TMDB_API_KEY),
+        params: new HttpParams().set('api_key', ENV.TMDB.key),
       }
     );
   }
+
   getMovieCredits(movieID: number) {
+    this.getLanguage();
     return this.http.get<MovieCredits>(
-      `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
+      ENV.TMDB.baseUrl + `${movieID}/credits?language=${this.language}`,
       {
-        params: new HttpParams().set('api_key', TMDB_API_KEY),
+        params: new HttpParams().set('api_key', ENV.TMDB.key),
       }
     );
   }

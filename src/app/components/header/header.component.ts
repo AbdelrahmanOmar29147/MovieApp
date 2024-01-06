@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { Subscription } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   private userSubscription!: Subscription;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   ngOnInit() {
+    this.checkAuthentication();
+  }
+
+  checkAuthentication() {
     this.userSubscription = this.authenticationService.user.subscribe(
       (user) => {
         if (user) {

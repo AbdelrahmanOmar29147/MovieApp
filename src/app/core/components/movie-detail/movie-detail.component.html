@@ -25,13 +25,13 @@
             genre.name
           }}</span>
           <span>
-            {{ movieDetails?.runtime + " Mins" }}
+            {{ movieDetails?.runtime + " " + ("mins" | translate) }}
           </span>
         </div>
         <p class="movie-tagline">
           <i>{{ movieDetails?.tagline }}</i>
         </p>
-        <h2 class="mb-0">Overview</h2>
+        <h2 class="mb-0">{{ "overview" | translate }}</h2>
         <p>{{ movieDetails?.overview }}</p>
       </section>
     </div>
@@ -47,7 +47,7 @@
 </header>
 
 <article class="container pb-5">
-  <h1 class="mt-3 title">Top Billed Cast</h1>
+  <h1 class="mt-3 title">{{ "cast" | translate }}</h1>
   <div class="row">
     <div class="col-lg-10 col-12">
       <div class="row cast-slider mx-0 px-0">
@@ -75,18 +75,24 @@
       </div>
     </div>
     <div class="col-lg-2 col-12">
-      <h1 class="mt-3 title">More Info</h1>
+      <h1 class="mt-3 title">{{ "moreInfo" | translate }}</h1>
       <div class="row">
         <div class="col-lg-12 col-4">
-          <p class="mb-0"><b>Status</b></p>
+          <p class="mb-0">
+            <b>{{ "status" | translate }}</b>
+          </p>
           <p>{{ movieDetails?.status }}</p>
         </div>
         <div class="col-lg-12 col-4">
-          <p class="mb-0"><b>Budget</b></p>
+          <p class="mb-0">
+            <b>{{ "budget" | translate }}</b>
+          </p>
           <p>{{ movieDetails?.budget + " $" }}</p>
         </div>
         <div class="col-lg-12 col-4">
-          <p class="mb-0"><b>Revenue</b></p>
+          <p class="mb-0">
+            <b>{{ "revenue" | translate }}</b>
+          </p>
           <p>{{ movieDetails?.revenue + " $" }}</p>
         </div>
       </div>

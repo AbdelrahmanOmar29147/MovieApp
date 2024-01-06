@@ -1,6 +1,8 @@
 <div class="container mt-5">
   <div *ngIf="isLoading">
-    <app-spinner></app-spinner>
+    <div class="d-flex justify-content-center">
+      <app-spinner></app-spinner>
+    </div>
   </div>
   <div class="row" *ngIf="!isLoading">
     <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let movie of moviesList">

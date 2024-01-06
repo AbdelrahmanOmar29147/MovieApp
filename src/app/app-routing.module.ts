@@ -16,6 +16,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./core/core.module').then((mod) => mod.CoreModule),
   },
+
+  { path: '**', pathMatch: 'full', redirectTo: '/catalog' },
 ];
 
 @NgModule({

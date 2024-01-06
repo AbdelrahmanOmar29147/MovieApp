@@ -17,3 +17,25 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+/* RTL */
+html[dir="rtl"] {
+  .inline-details {
+    span + span::before {
+      right: 7px;
+    }
+  }
+  .background-img {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+  }
+}
+
+// .mat-mdc-cat {
+//   .spinner-container {
+//     .spinner-color circle {
+//       stroke: var(--mdc-circular-progress-active-indicator-color);
+//       fill: black;
+//     }
+//   }
+// }

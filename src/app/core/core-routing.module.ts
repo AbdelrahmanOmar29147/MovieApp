@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CatalogComponent } from './pages/catalog/catalog.component';
-import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { AuthGuard } from '../authentication/auth.guard';
 
 const routes: Routes = [

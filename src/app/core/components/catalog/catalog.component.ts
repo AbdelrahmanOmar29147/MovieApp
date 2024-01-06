@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../models/movies';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,8 +9,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.scss',
 })
-export class CatalogComponent implements OnInit, OnDestroy {
-  constructor(private _moviesservice: MoviesService) {}
+export class CatalogComponent implements OnInit {
+  constructor(
+    private _moviesService: MoviesService,
+    private translate: TranslateService
+  ) {}
 
   isLoading: boolean = false;
   moviesList!: Movie[];
@@ -19,13 +23,14 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getMovies(this.currentPage);
+    this.handleLanguageChange();
   }
 
   getMovies(pageNumber: number): void {
     this.isLoading = true;
     this.movieSubscription && this.movieSubscription.unsubscribe();
-    this.movieSubscription = this._moviesservice
-      .getTopMovies(pageNumber)
+    this.movieSubscription = this._moviesService
+      .getMovies(pageNumber)
       .subscribe((res) => {
         this.moviesList = res.results;
         this.totalPages = res.total_pages;
@@ -33,7 +38,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.movieSubscription.unsubscribe();
+  handleLanguageChange(): void {
+    this.translate.onLangChange.subscribe(() => {
+      this.getMovies(this.currentPage);
+    });
   }
 }

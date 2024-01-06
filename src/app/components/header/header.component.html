@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container">
     <h1 class="mb-0">
-      <a class="navbar-brand" routerLink="">HappyNewMovie!</a>
+      <a class="navbar-brand" routerLink="">{{ "brand" | translate }}</a>
     </h1>
     <button
       class="navbar-toggler"
@@ -22,7 +22,7 @@
             routerLink="/catalog"
             routerLinkActive="active"
             class="nav-link"
-            >Catalog</a
+            >{{ "catalog" | translate }}</a
           >
         </li>
         <li class="nav-item">
@@ -32,7 +32,7 @@
             color="accent"
             class="authentication-button"
             *ngIf="!isLoggedIn"
-            >Login</a
+            >{{ "login" | translate }}</a
           >
           <button
             mat-flat-button
@@ -41,8 +41,9 @@
             (click)="onLogout()"
             *ngIf="isLoggedIn"
           >
-            Logout
+            {{ "logout" | translate }}
           </button>
+          <app-language-switcher></app-language-switcher>
         </li>
       </ul>
     </div>

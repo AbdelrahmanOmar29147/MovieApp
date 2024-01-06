@@ -1,3 +1,4 @@
+/* DESKTOP */
 header {
   position: relative;
   color: white;
@@ -39,7 +40,7 @@ header {
       z-index: -1;
     }
     span + span {
-      padding-left: 20px;
+      padding-inline-start: 20px;
       position: relative;
       top: 0;
       left: 0;
@@ -100,6 +101,7 @@ article {
   }
 }
 
+/* Tablet */
 @media only screen and (max-width: 992px) {
   header {
     .container-wrapper {
@@ -117,6 +119,7 @@ article {
   }
 }
 
+/* Large Mobile */
 @media only screen and (max-width: 768px) {
   header {
     .movie-title {
@@ -131,6 +134,7 @@ article {
   }
 }
 
+/* Mobile */
 @media only screen and (max-width: 576px) {
   header {
     .movie-title {

@@ -10,10 +10,6 @@ export class PaginatorComponent {
   @Input() totalPages!: number;
   @Output() paginate = new EventEmitter<number>();
 
-  // ngOnInit() {
-  //   console.log(this.currentPage);
-  // }
-
   getNextPage() {
     this.currentPage++;
     this.paginate.emit(this.currentPage);

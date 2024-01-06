@@ -24,6 +24,10 @@ export class AuthPageComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.authenticatedNavigation();
+  }
+
+  authenticatedNavigation() {
     this.userSubscription = this.authenticationService.user.subscribe(() => {
       this.router.navigate(['/catalog']);
     });

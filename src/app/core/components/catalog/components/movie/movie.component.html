@@ -8,19 +8,17 @@
       class="movie-img img-fluid w-100"
   /></mat-card-header>
   <mat-card-content>
-    <div class="spinner-container position-absolute">
-      <div class="position-relative">
-        <mat-progress-spinner
-          mode="determinate"
-          [value]="movieRating"
-          diameter="60"
-          strokeWidth="4"
-          class="spinner-color"
-        ></mat-progress-spinner>
-        <span class="spinner-text position-absolute">{{
-          movieRating + "%"
-        }}</span>
-      </div>
+    <div class="spinner-container position-relative">
+      <mat-progress-spinner
+        mode="determinate"
+        [value]="movieRating"
+        diameter="50"
+        strokeWidth="4"
+        class="spinner-color"
+      ></mat-progress-spinner>
+      <span class="spinner-text position-absolute">{{
+        movieRating + "%"
+      }}</span>
     </div>
     <h2 class="movie-title">{{ movie?.title }}</h2>
     <span class="movie-date">{{ movie?.release_date }}</span>
