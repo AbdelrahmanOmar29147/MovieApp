@@ -1,3 +1,10 @@
+:root {
+  --primary: #3f51b5;
+  --accent: #b5a33f;
+  --CTA: #ff4081;
+  --warning: #f44336;
+}
+
 /* You can add global styles to this file, and also import other style files */
 html,
 body {
@@ -30,12 +37,3 @@ html[dir="rtl"] {
     transform: scaleX(-1);
   }
 }
-
-// .mat-mdc-cat {
-//   .spinner-container {
-//     .spinner-color circle {
-//       stroke: var(--mdc-circular-progress-active-indicator-color);
-//       fill: black;
-//     }
-//   }
-// }

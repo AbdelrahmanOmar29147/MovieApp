@@ -1,8 +1,8 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-6 col-12 mx-auto">
-      <div class="alert alert-danger" *ngIf="error">
-        <p>{{ error }}</p>
+      <div class="alert" color="warn" *ngIf="error">
+        <p class="mb-0">{{ error }}</p>
       </div>
       <div
         class="d-flex align-items-center justify-content-center"
@@ -12,8 +12,8 @@
       </div>
       <form
         class=""
-        [formGroup]="authenticationForm"
-        (ngSubmit)="onSubmit()"
+        #authForm="ngForm"
+        (ngSubmit)="onSubmit(authForm)"
         *ngIf="!isLoading"
       >
         <mat-form-field class="w-100">
@@ -22,17 +22,27 @@
             type="email"
             matInput
             placeholder="{{ 'example' | translate }} pat@example.com"
-            formControlName="email"
+            name="email"
+            ngModel
+            required
+            email
           />
         </mat-form-field>
         <mat-form-field class="w-100">
           <mat-label>{{ "password" | translate }}</mat-label>
-          <input type="password" matInput formControlName="password" />
+          <input
+            type="password"
+            matInput
+            name="password"
+            ngModel
+            required
+            pattern="^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$"
+          />
         </mat-form-field>
         <button
           mat-raised-button
           type="submit"
-          [disabled]="!authenticationForm.valid"
+          [disabled]="!authForm.valid"
           class="d-block mx-auto mb-2 submit-button"
         >
           {{ (isLogin ? "login" : "signup") | translate }}

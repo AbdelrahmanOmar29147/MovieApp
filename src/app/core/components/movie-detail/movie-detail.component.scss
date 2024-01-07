@@ -2,7 +2,7 @@
 header {
   position: relative;
   color: white;
-  background-color: #3f51b5;
+  background-color: var(--primary);
   z-index: -11;
   .content-wrapper {
     padding: 1.5rem;
@@ -75,7 +75,7 @@ header {
 
 article {
   .title {
-    color: #3f51b5;
+    color: var(--primary);
     font-size: 1.6rem;
     font-weight: 600;
   }

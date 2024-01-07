@@ -102,7 +102,7 @@ export class AuthenticationService {
     }
     switch (errorRes.error.error.message) {
       case 'EMAIL_EXISTS':
-        errorMessage = 'This email or password are not correct.';
+        errorMessage = 'This email already exists.';
         break;
       case 'EMAIL_NOT_FOUND':
         errorMessage = 'This email or password are not correct.';

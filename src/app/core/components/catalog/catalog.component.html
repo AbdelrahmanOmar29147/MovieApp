@@ -5,7 +5,10 @@
     </div>
   </div>
   <div class="row" *ngIf="!isLoading">
-    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let movie of moviesList">
+    <div
+      class="col-lg-3 col-md-4 col-sm-6 movie-test"
+      *ngFor="let movie of moviesList"
+    >
       <app-movie [movie]="movie"></app-movie>
     </div>
   </div>

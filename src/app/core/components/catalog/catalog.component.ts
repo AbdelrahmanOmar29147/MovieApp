@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class CatalogComponent implements OnInit {
   constructor(
-    private _moviesService: MoviesService,
+    private moviesService: MoviesService,
     private translate: TranslateService
   ) {}
 
@@ -29,7 +29,7 @@ export class CatalogComponent implements OnInit {
   getMovies(pageNumber: number): void {
     this.isLoading = true;
     this.movieSubscription && this.movieSubscription.unsubscribe();
-    this.movieSubscription = this._moviesService
+    this.movieSubscription = this.moviesService
       .getMovies(pageNumber)
       .subscribe((res) => {
         this.moviesList = res.results;

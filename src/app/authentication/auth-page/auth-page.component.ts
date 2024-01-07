@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { AuthResponseData } from '../user.model';
 import { Observable, Subscription } from 'rxjs';
@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
   styleUrl: './auth-page.component.scss',
 })
 export class AuthPageComponent implements OnInit {
-  authenticationForm!: FormGroup;
   userSubscription!: Subscription;
   isLogin = true;
   isLoading = false;
@@ -23,7 +22,6 @@ export class AuthPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initForm();
     this.authenticatedNavigation();
   }
 
@@ -32,27 +30,16 @@ export class AuthPageComponent implements OnInit {
       this.router.navigate(['/catalog']);
     });
   }
-
-  private initForm() {
-    this.authenticationForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/),
-      ]),
-    });
-  }
-
   onSwitchAuth() {
     this.isLogin = !this.isLogin;
   }
 
-  onSubmit() {
-    if (!this.authenticationForm.valid) {
+  onSubmit(form: NgForm) {
+    if (!form.valid) { 
       return;
     }
 
-    const { email, password } = this.authenticationForm.value;
+    const { email, password } = form.value;
     let authObservable: Observable<AuthResponseData>;
     this.isLoading = true;
 
@@ -72,7 +59,7 @@ export class AuthPageComponent implements OnInit {
         this.error = err;
       },
     });
-    this.authenticationForm.reset();
+    form.reset();
   }
 
   ngOnDestroy() {

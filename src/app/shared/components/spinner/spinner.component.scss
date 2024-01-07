@@ -10,11 +10,10 @@
     width: 51px;
     height: 51px;
     margin: 6px;
-    border: 6px solid var(--mdc-circular-progress-active-indicator-color);
+    border: 6px solid var(--primary);
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: var(--mdc-circular-progress-active-indicator-color)
-      transparent transparent transparent;
+    border-color: var(--primary) transparent transparent transparent;
     &:nth-child(1) {
       animation-delay: -0.45s;
     }
