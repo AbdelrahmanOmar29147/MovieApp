@@ -14,7 +14,7 @@ const routes: Routes = [
       import('./core/core.module').then((mod) => mod.CoreModule),
   },
 
-  { path: '**', pathMatch: 'full', redirectTo: '/authentication' },
+  { path: '**', pathMatch: 'full', redirectTo: '/catalog' },
 ];
 
 @NgModule({

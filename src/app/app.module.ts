@@ -17,10 +17,9 @@ import { HttpLoaderFactory } from './shared/util';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthenticationModule,
     SharedModule,
     TranslateModule.forRoot({
-      loader: { 
+      loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
