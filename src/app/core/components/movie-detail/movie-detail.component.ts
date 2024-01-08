@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MovieCredits, MovieDetails } from '../../models/movies';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,8 @@ export class MovieDetailComponent {
 
   constructor(
     private moviesService: MoviesService,
-    private route: ActivatedRoute,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
     private translate: TranslateService
   ) {}
 
@@ -31,7 +32,7 @@ export class MovieDetailComponent {
   }
 
   getMovieID() {
-    this.route.params.subscribe((params: Params) => {
+    this.activatedRoute.params.subscribe((params: Params) => {
       this.movieID = params['id'];
     });
   }
@@ -39,8 +40,13 @@ export class MovieDetailComponent {
   getMovieDetails(): void {
     this.detailsSubscription = this.moviesService
       .getMovieDetails(this.movieID)
-      .subscribe((data) => {
-        this.movieDetails = data;
+      .subscribe({
+        next: (data) => {
+          this.movieDetails = data;
+        },
+        error: () => {
+          this.route.navigate(['/authentication']);
+        },
       });
   }
 
