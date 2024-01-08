@@ -45,7 +45,8 @@ export class MovieDetailComponent {
           this.movieDetails = data;
         },
         error: () => {
-          this.route.navigate(['/authentication']);
+          console.log('hello');
+          this.route.navigate(['/catalog']);
         },
       });
   }

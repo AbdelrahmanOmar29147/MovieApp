@@ -9,7 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
-import { HttpLoaderFactory } from './core/services/util';
+import { HttpLoaderFactory } from './shared/util';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LanguageSwitcherComponent],

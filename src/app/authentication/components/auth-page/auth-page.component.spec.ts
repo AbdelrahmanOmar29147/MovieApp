@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthPageComponent } from './auth-page.component';
-import { AuthenticationModule } from '../authentication.module';
-import { AppModule } from '../../app.module';
+import { AuthenticationModule } from '../../authentication.module';
+import { AppModule } from '../../../app.module';
 
 describe('AuthPageComponent', () => {
   let component: AuthPageComponent;

@@ -4,7 +4,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../core/services/util';
+import { HttpLoaderFactory } from './util';
 
 @NgModule({
   declarations: [SpinnerComponent],
