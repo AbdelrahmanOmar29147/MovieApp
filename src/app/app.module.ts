@@ -20,7 +20,7 @@ import { HttpLoaderFactory } from './shared/util';
     AuthenticationModule,
     SharedModule,
     TranslateModule.forRoot({
-      loader: {
+      loader: { 
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],

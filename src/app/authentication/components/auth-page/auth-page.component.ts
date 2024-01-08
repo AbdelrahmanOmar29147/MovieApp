@@ -26,9 +26,11 @@ export class AuthPageComponent implements OnInit {
   }
 
   authenticatedNavigation() {
-    this.userSubscription = this.authenticationService.user.subscribe(() => {
-      this.router.navigate(['/catalog']);
-    });
+    this.userSubscription = this.authenticationService.user.subscribe(
+      (data) => {
+        data && this.router.navigate(['/catalog']);
+      }
+    );
   }
   onSwitchAuth() {
     this.isLogin = !this.isLogin;

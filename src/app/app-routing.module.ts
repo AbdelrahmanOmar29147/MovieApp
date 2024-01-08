@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthPageComponent } from './authentication/components/auth-page/auth-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/catalog', pathMatch: 'full' },
-
+  { path: '', redirectTo: '/authentication', pathMatch: 'full' },
   {
     path: 'authentication',
-    loadChildren: () =>
-      import('./authentication/authentication.module').then(
-        (mod) => mod.AuthenticationModule
-      ),
+    component: AuthPageComponent,
   },
   {
     path: 'catalog',
@@ -17,7 +14,7 @@ const routes: Routes = [
       import('./core/core.module').then((mod) => mod.CoreModule),
   },
 
-  { path: '**', pathMatch: 'full', redirectTo: '/catalog' },
+  { path: '**', pathMatch: 'full', redirectTo: '/authentication' },
 ];
 
 @NgModule({
