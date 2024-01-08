@@ -2,7 +2,7 @@
   <mat-card-header>
     <img
       [src]="
-        'https://www.themoviedb.org/t/p/w220_and_h330_face' + movie?.poster_path
+        'https://www.themoviedb.org/t/p/w220_and_h330_face' + movie!.poster_path
       "
       alt="Movie Image"
       class="movie-img img-fluid w-100"
@@ -20,7 +20,7 @@
         movieRating + "%"
       }}</span>
     </div>
-    <h2 class="movie-title">{{ movie?.title }}</h2>
-    <span class="movie-date">{{ movie?.release_date }}</span>
+    <h2 class="movie-title">{{ movie!.title }}</h2>
+    <span class="movie-date">{{ movie!.release_date }}</span>
   </mat-card-content>
 </mat-card>
