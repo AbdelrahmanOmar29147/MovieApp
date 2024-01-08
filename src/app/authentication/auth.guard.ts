@@ -20,7 +20,6 @@ export class AuthGuard {
     return this.authenticationService.user.pipe(
       take(1),
       map((user) => {
-        console.log('first');
         if (!!user) {
           return true;
         }
