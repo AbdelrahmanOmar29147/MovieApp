@@ -30,10 +30,10 @@ export class CatalogComponent implements OnInit {
     this.isLoading = true;
     this.movieSubscription && this.movieSubscription.unsubscribe();
     this.movieSubscription = this.moviesService
-      .getMovies(pageNumber)
+      .getMovies(pageNumber - 1)
       .subscribe((res) => {
-        this.moviesList = res.results;
-        this.totalPages = res.total_pages;
+        this.moviesList = res.content;
+        this.totalPages = res.totalPages;
         this.isLoading = false;
       });
   }

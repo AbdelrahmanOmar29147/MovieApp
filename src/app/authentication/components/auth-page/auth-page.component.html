@@ -16,6 +16,28 @@
         (ngSubmit)="onSubmit(authForm)"
         *ngIf="!isLoading"
       >
+        <mat-form-field class="w-100" *ngIf="!isLogin">
+          <mat-label>First Name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Abdelrahman"
+            name="firstName"
+            ngModel
+            required
+          />
+        </mat-form-field>
+        <mat-form-field class="w-100" *ngIf="!isLogin">
+          <mat-label>Last Name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Omar"
+            name="lastName"
+            ngModel
+            required
+          />
+        </mat-form-field>
         <mat-form-field class="w-100">
           <mat-label>{{ "email" | translate }}</mat-label>
           <input

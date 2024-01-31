@@ -14,63 +14,44 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string, firstName: string, lastName: string) {
     return this.http
-      .post<AuthResponseData>(
-        ENV.firebase.baseUrl + `accounts:signUp?key=${ENV.firebase.key}`,
-        { email: email, password: password, returnSecureToken: true }
-      )
+      .post<AuthResponseData>(ENV.firebase.port + `/register`, {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password,
+      })
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
-          );
+          this.handleAuthentication(resData.token);
         })
       );
   }
 
   login(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(
-        ENV.firebase.baseUrl +
-          `accounts:signInWithPassword?key=${ENV.firebase.key}`,
-        { email: email, password: password, returnSecureToken: true }
-      )
+      .post<AuthResponseData>(ENV.firebase.port + `/authenticate`, {
+        email: email,
+        password: password,
+      })
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
-          );
+          this.handleAuthentication(resData.token);
         })
       );
   }
 
   autoLogin() {
-    const userData: {
-      email: string;
-      id: string;
-      _token: string;
-      _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem('userData')!);
+    const token = localStorage.getItem('userData');
 
-    if (!userData) {
+    if (!token) {
       return;
     }
 
-    const loadedUser = new User(
-      userData.email,
-      userData.id,
-      userData._token,
-      new Date(userData._tokenExpirationDate)
-    );
+    const loadedUser = new User(token);
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
@@ -83,16 +64,10 @@ export class AuthenticationService {
     localStorage.removeItem('userData');
   }
 
-  private handleAuthentication(
-    email: string,
-    userId: string,
-    token: string,
-    expiresIn: number
-  ) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(email, userId, token, expirationDate);
+  private handleAuthentication(token: string) {
+    const user = new User(token);
     this.user.next(user);
-    localStorage.setItem('userData', JSON.stringify(user));
+    localStorage.setItem('userData', token);
   }
 
   private handleError(errorRes: HttpErrorResponse) {

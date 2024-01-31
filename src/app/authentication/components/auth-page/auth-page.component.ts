@@ -41,14 +41,20 @@ export class AuthPageComponent implements OnInit {
       return;
     }
 
-    const { email, password } = form.value;
     let authObservable: Observable<AuthResponseData>;
     this.isLoading = true;
 
     if (this.isLogin) {
+      const { email, password } = form.value;
       authObservable = this.authenticationService.login(email, password);
     } else {
-      authObservable = this.authenticationService.signup(email, password);
+      const { email, password, firstName, lastName } = form.value;
+      authObservable = this.authenticationService.signup(
+        email,
+        password,
+        firstName,
+        lastName
+      );
     }
 
     authObservable.subscribe({

@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENV } from '../../../environments/environment';
 import {
@@ -13,6 +13,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 })
 export class MoviesService {
   language: string = localStorage.getItem('language')!;
+  token: string = localStorage.getItem('userData')!;
 
   constructor(private http: HttpClient, private translate: TranslateService) {}
 
@@ -25,21 +26,18 @@ export class MoviesService {
   getMovies(pageNumber: number) {
     this.getLanguage();
     return this.http.get<MoviesResponseData>(
-      ENV.TMDB.bonusUrl + `?language=${this.language}S&page=${pageNumber}`,
+      ENV.TMDB.port + `?pageNo=${pageNumber}`,
       {
-        params: new HttpParams().set('api_key', ENV.TMDB.key),
+        headers: new HttpHeaders({ Authorization: `Bearer ${this.token}` }),
       }
     );
   }
 
   getMovieDetails(movieID: number) {
     this.getLanguage();
-    return this.http.get<MovieDetails>(
-      ENV.TMDB.baseUrl + `${movieID}?language=${this.language}`,
-      {
-        params: new HttpParams().set('api_key', ENV.TMDB.key),
-      }
-    );
+    return this.http.get<MovieDetails>(ENV.TMDB.port + `/${movieID}`, {
+      headers: new HttpHeaders({ Authorization: `Bearer ${this.token}` }),
+    });
   }
 
   getMovieCredits(movieID: number) {

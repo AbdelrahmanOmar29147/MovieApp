@@ -17,13 +17,8 @@
         <h1 class="movie-title">{{ movieDetails?.title }}</h1>
         <div class="inline-details">
           <span>{{ movieDetails?.release_date }}</span>
-          <span
-            *ngFor="let country_code of movieDetails?.production_countries"
-            >{{ country_code.iso_3166_1 }}</span
-          >
-          <span *ngFor="let genre of movieDetails?.genres">{{
-            genre.name
-          }}</span>
+          <span>{{ movieDetails?.production_country }}</span>
+          <span *ngFor="let genre of movieDetails?.genres">{{ genre }}</span>
           <span>
             {{ movieDetails?.runtime + " " + ("mins" | translate) }}
           </span>

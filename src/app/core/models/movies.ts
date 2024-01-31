@@ -40,7 +40,7 @@ export interface MovieDetails extends Omit<Movie, 'genre_ids'> {
   production_companies: [
     { id: number; logo_path: string; name: string; origin_country: string }
   ];
-  production_countries: [{ iso_3166_1: string; name: string }];
+  production_country: string;
   revenue: number;
   runtime: number;
   spoken_languages: [{ english_name: string; iso_639_1: string; name: string }];
@@ -55,6 +55,8 @@ export interface MovieCredits {
 }
 
 export interface MoviesResponseData {
+  totalPages: number;
+  content: Movie[];
   page: number;
   results: Movie[];
   total_pages: number;
