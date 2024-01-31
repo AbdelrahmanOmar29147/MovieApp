@@ -14,13 +14,20 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(email: string, password: string, firstName: string, lastName: string) {
+  signup(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    captchaToken: string
+  ) {
     return this.http
       .post<AuthResponseData>(ENV.firebase.port + `/register`, {
         firstname: firstName,
         lastname: lastName,
         email: email,
         password: password,
+        token: captchaToken,
       })
       .pipe(
         catchError(this.handleError),
@@ -30,11 +37,12 @@ export class AuthenticationService {
       );
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string, captchaToken: string) {
     return this.http
       .post<AuthResponseData>(ENV.firebase.port + `/authenticate`, {
         email: email,
         password: password,
+        token: captchaToken,
       })
       .pipe(
         catchError(this.handleError),

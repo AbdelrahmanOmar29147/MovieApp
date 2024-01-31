@@ -4,6 +4,8 @@ import { AuthenticationService } from '../../authentication.service';
 import { AuthResponseData } from '../../user.model';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { ENV } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-auth-page',
@@ -15,8 +17,12 @@ export class AuthPageComponent implements OnInit {
   isLogin = true;
   isLoading = false;
   error: string = '';
+  key: string = ENV.GOOGLE.RECAPTCHA;
+  captchaToken!: string;
+  isCaptchaAuthenticated = false;
 
   constructor(
+    private recaptchaV3Service: ReCaptchaV3Service,
     private authenticationService: AuthenticationService,
     private router: Router
   ) {}
@@ -46,14 +52,19 @@ export class AuthPageComponent implements OnInit {
 
     if (this.isLogin) {
       const { email, password } = form.value;
-      authObservable = this.authenticationService.login(email, password);
+      authObservable = this.authenticationService.login(
+        email,
+        password,
+        this.captchaToken
+      );
     } else {
       const { email, password, firstName, lastName } = form.value;
       authObservable = this.authenticationService.signup(
         email,
         password,
         firstName,
-        lastName
+        lastName,
+        this.captchaToken
       );
     }
 
@@ -68,6 +79,24 @@ export class AuthPageComponent implements OnInit {
       },
     });
     form.reset();
+  }
+
+  send(form: NgForm): void {
+    if (form.invalid) {
+      for (const control of Object.keys(form.controls)) {
+        form.controls[control].markAsTouched();
+      }
+      return;
+    }
+
+    this.isCaptchaAuthenticated = true;
+
+    this.recaptchaV3Service
+      .execute('importantAction')
+      .subscribe((token: string) => {
+        console.log(token);
+        this.captchaToken = token;
+      });
   }
 
   ngOnDestroy() {

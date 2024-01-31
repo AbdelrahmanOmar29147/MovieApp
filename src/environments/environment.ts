@@ -10,4 +10,7 @@ export const ENV = {
     baseUrl: 'https://identitytoolkit.googleapis.com/v1/',
     key: 'AIzaSyDl_akTC4eSnoh5CIVV5GdQ0-wIk8jXHWw',
   },
+  GOOGLE: {
+    RECAPTCHA: '6Lfc4mApAAAAANr_onbM0zmFzqW3QG7qcp8ptNWA',
+  },
 };

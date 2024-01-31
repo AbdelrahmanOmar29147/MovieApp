@@ -10,6 +10,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 import { HttpLoaderFactory } from './shared/util';
+import {
+  RECAPTCHA_V3_SITE_KEY,
+  ReCaptchaV3Service,
+  RecaptchaV3Module,
+} from 'ng-recaptcha';
+import { ENV } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LanguageSwitcherComponent],
@@ -25,8 +31,15 @@ import { HttpLoaderFactory } from './shared/util';
         deps: [HttpClient],
       },
     }),
+    RecaptchaV3Module,
   ],
-  providers: [],
+  providers: [
+    ReCaptchaV3Service,
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: ENV.GOOGLE.RECAPTCHA,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
